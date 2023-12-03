@@ -6,6 +6,15 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary: #5a54e0;
+  --secondary: #fea5ff;
+  --buttonAccent: #7872dd;
+  --white: #f2f2f2;
+  --black: #0d0d1b;
+  --purplishblack: #1f1f39;
+  --black2: #5b54e039;
+  --footerblack: #06051a;
+  --newblack: #020203;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,10 +27,227 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.pulsate-image {
+  animation: pulsateBrightness 0.5s infinite cubic-bezier(0.58, 0.08, 0.4, 1.26);
+}
+
+.pulsate-load {
+  animation: pulsateBrightnessLoad 1s infinite cubic-bezier(0.58, 0.08, 0.4, 1.26);
+}
+
+@keyframes pulsateBrightness {
+
+  0%,
+  100% {
+    filter: brightness(0.4);
+  }
+
+  50% {
+    filter: brightness(2);
+  }
+}
+
+@keyframes pulsateBrightnessLoad {
+
+  0%,
+  100% {
+    filter: brightness(0.6);
+  }
+
+  50% {
+    filter: brightness(1.3);
+  }
+}
+
+/* For the thumb (the part you drag) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Color of the draggable scrolling element */
+  border-radius: 10px;
+  /* Rounded corners */
+  opacity: 0.2;
+  /* Initial transparency */
+  transition: opacity 0.3s;
+  /* Smooth transition */
+}
+
+/* For the track (the background) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Color of the track */
+  border-radius: 10px;
+  /* Rounded corners */
+  opacity: 0.2;
+  /* Initial transparency */
+}
+
+/* For the buttons on the scrollbar (up and down arrows - if they exist) */
+/*::-webkit-scrollbar-button { */
+/*background-color: #555; */
+/* Color of the buttons */
+/*}*/
+
+/* For the width of the scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  /* Width of the vertical scrollbar */
+  height: 7px;
+  /* Height of the horizontal scrollbar */
+}
+
+.user {
+  position: relative;
+}
+
+.user::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  /* Adjust this value to position the tail up or down */
+  left: -10px;
+  /* Positioning the tail on the left of the bubble */
+  width: 0;
+  height: 0;
+  border-top: 0px solid transparent;
+  /* Adjust these border values to modify tail size */
+  border-right: 10px solid #4641ad;
+  /* Color should match the bubble's background */
+  border-bottom: 10px solid transparent;
+}
+
+/* .loading-container {
+  display: flex;
+  gap: 0.5rem;
+} */
+
+.loading-dot {
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  margin-left: 1px;
+  border-radius: 50%;
+  background-color: #e3e3ee;
+  animation: bounce 1.6s infinite;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  25% {
+    transform: translateY(-4px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  75% {
+    transform: translateY(-4px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+input[type="range"].slider-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 30%;
+  background: #5953e0;
+  /* Thumb background */
+  cursor: pointer;
+}
+
+input[type="range"].slider-thumb::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background: #5953e0;
+  cursor: pointer;
+}
+
+input[type="range"].slider-thumb::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: #9590f4;
+  /* Track background */
+  /* border-radius: 15px; */
+}
+
+input[type="range"].slider-thumb::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: #efefef;
+  /* border-radius: 4px; */
+}
+
+.checkboxes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columns of equal width */
+  gap: 1rem;
+  /* Adjust gap as needed */
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-50;
+  }
+}
+
+.custom-audio-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-audio-player button {
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-audio-player input[type="range"] {
+  width: 100%;
+}
+
+.custom-audio-player .download-button {
+  background-color: #008cba;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.custom-audio-player .drag-hook-icon {
+  /* Add styling for your hook icon here */
+  width: 24px;
+  height: 24px;
+  cursor: move;
+  /* Indicates that it's draggable */
 }
